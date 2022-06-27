@@ -9,41 +9,21 @@ if vim.fn.has('termguicolors') == 1 then
 end
 
 vim.cmd[[
-" hi! link DiagnosticError GruvboxRed
-" hi! link DiagnosticWarning GruvboxOrange
-" hi! link DiagnosticInformation GruvboxYellow
-" hi! link DiagnosticHint GruvboxBlue
-"
 hi! link DiagnosticUnderlineError ALEError
 hi! link DiagnosticUnderlineHint ALEInfo
 hi! link DiagnosticUnderlineInfo ALEInfo
 hi! link DiagnosticUnderlineWarning ALEWarning
 
-" Gruvbox
-" hi! link DiagnosticVirtualTextError GruvboxRed
-" hi! link DiagnosticVirtualTextWarning GruvboxOrange
-" hi! link DiagnosticVirtualTextInformation GruvboxYellow
-" hi! link DiagnosticVirtualTextHint GruvboxBlue
-
-" Gruvbox8
 hi! link DiagnosticVirtualTextError CocErrorFloat
 hi! link DiagnosticVirtualTextWarning CocWarningFloat
 hi! link DiagnosticVirtualTextInformation CocInfoFloat
 hi! link DiagnosticVirtualTextHint CocHintFloat
-
-" Gruvbox8 signs
-sign define DiagnosticSignError text=✘ texthl=CocErrorSign linehl= numhl=
-sign define DiagnosticSignWarning text=» texthl=CocWarningSign linehl= numhl=
-sign define DiagnosticSignInformation text=ⓘ texthl=CocInfoSign linehl= numhl=
-sign define DiagnosticSignHint text=► texthl=CocHintSign linehl= numhl=
-
-" Gruvbox signs
-" sign define DiagnosticSignError text=✘ texthl=GruvboxRedSign linehl= numhl=GruvboxRed
-" sign define DiagnosticSignWarning text=» texthl=GruvboxYellowSign linehl= numhl=GruvboxOrange
-" sign define DiagnosticSignInformation text=ⓘ texthl=GruvboxBlueSign linehl= numhl=GruvboxBlue
-" sign define DiagnosticSignHint text=► texthl=GruvboxAquaSign linehl= numhl=GruvboxAqua
 ]]
 
+vim.fn.sign_define("DiagnosticSignError", {text="✘", texthl="CocErrorSign", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignWarn", {text="⚠", texthl="CocWarningSign", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignInformation", {text="»", texthl="CocInfoSign", linehl="", numhl=""})
+vim.fn.sign_define("DiagnosticSignHint", {text="ⓘ", texthl="CocHintSign", linehl="", numhl=""})
 
 set.signcolumn='yes'
 vim.cmd('syntax enable')
@@ -112,11 +92,11 @@ set.directory = "/Users/dialtone/.vim/_temp"
 set.wildignore:append("*.pyc")
 
 vim.cmd([[
-function WriteCreatingDirs()
+function! WriteCreatingDirs()
     execute ':silent !mkdir -p %:h'
     write
 endfunction
-command W call WriteCreatingDirs()
+command! W call WriteCreatingDirs()
 ]])
 
 if vim.fn.has('gui_running') then

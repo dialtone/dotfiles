@@ -16,6 +16,13 @@ au({"BufRead", "BufNewFile"}, {
     callback=setup_markdown
 })
 
+-- Highlight yanked area for 500ms
+-- au TextYankPost * silent! lua vim.highlight.on_yank()
+au("TextYankPost", {pattern="*", callback=function()
+    vim.highlight.on_yank({timeout=500})
+end
+})
+
 
 -- Remember last location in file, but not for commit messages.
 -- see :help last-position-jump
@@ -45,6 +52,7 @@ au("FileType", {pattern="make", callback=function ()
     vim.bo.expandtab=true
 end
 })
+
 
 -- autoformat go
 function go_organize_imports_sync(wait_ms)

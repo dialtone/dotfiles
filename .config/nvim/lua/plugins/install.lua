@@ -32,7 +32,6 @@ return require('packer').startup(function()
 
     -- Optional dependencies
     -- use 'nvim-lua/popup.nvim'
-    -- use 'nvim-lua/plenary.nvim'
     -- use 'nvim-telescope/telescope.nvim'
 
     -- nvim 0.4+
@@ -75,9 +74,6 @@ return require('packer').startup(function()
       end,
       requires = {'hoob3rt/lualine.nvim', 'kyazdani42/nvim-web-devicons'}
     }
-
-
-    use 'machakann/vim-highlightedyank'
 
     use 'dag/vim-fish'
     use 'godlygeek/tabular'
