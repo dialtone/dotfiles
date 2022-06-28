@@ -90,6 +90,7 @@ m.map("!", "<Leader>O", "<esc>O")
 m.map("!", "<Leader>o", "<esc>o")
 
 
+m.nmap("<leader>o", ":PyrightOrganizeImports<cr>")
 
 -- Highlight all instances of word under cursor, when idle.
 -- Useful when studying strange source code.

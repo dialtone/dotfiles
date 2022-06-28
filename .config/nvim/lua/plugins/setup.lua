@@ -9,11 +9,39 @@ vim.opt.shortmess:append("c")
 -- lspconfig object
 local lspconfig = require'lspconfig'
 
--- function to attach completion and diagnostics
--- when setting up lsp
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-    -- vim.api.nvim_command("au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)")
+
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+m.nmap('<space>e', vim.diagnostic.open_float)
+m.nmap('[d', vim.diagnostic.goto_prev)
+m.nmap(']d', vim.diagnostic.goto_next)
+m.nmap('<space>q', vim.diagnostic.setloclist)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  -- local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { buffer=bufnr }
+  m.nmap('gD', vim.lsp.buf.declaration, bufopts)
+  m.nmap('gd', vim.lsp.buf.definition, bufopts)
+  m.nmap('K', vim.lsp.buf.hover, bufopts)
+  m.nmap('gi', vim.lsp.buf.implementation, bufopts)
+  m.nmap('<C-k>', vim.lsp.buf.signature_help, bufopts)
+  m.nmap('<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  m.nmap('<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  m.nmap('<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  m.nmap('<space>D', vim.lsp.buf.type_definition, bufopts)
+  m.nmap('<space>rn', vim.lsp.buf.rename, bufopts)
+  m.nmap('<space>ca', vim.lsp.buf.code_action, bufopts)
+  m.nmap('gr', vim.lsp.buf.references, bufopts)
+  m.nmap('<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
 local util = require 'lspconfig/util'
@@ -41,20 +69,20 @@ local util = require 'lspconfig/util'
 --})
 
 
--- code navigation shortcuts
-m.nmap("ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-m.nmap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-m.nmap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-m.nmap("<c+k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-m.nmap("gD", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-m.nmap("gT", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
-m.nmap("rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-m.nmap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-m.nmap("g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-m.nmap("gW", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
-
-m.nmap("g[", ":lua vim.diagnostic.goto_prev()<CR>")
-m.nmap("g]", ":lua vim.diagnostic.goto_next()<CR>")
+-- -- code navigation shortcuts
+-- m.nmap("ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+-- m.nmap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+-- m.nmap("K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+-- m.nmap("<c+k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+-- m.nmap("gD", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+-- m.nmap("gT", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
+-- m.nmap("rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+-- m.nmap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+-- m.nmap("g0", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
+-- m.nmap("gW", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+--
+-- m.nmap("g[", ":lua vim.diagnostic.goto_prev()<CR>")
+-- m.nmap("g]", ":lua vim.diagnostic.goto_next()<CR>")
 
 -- debug codelens stuff
 m.nmap("<leader>cf", "<Cmd>lua vim.lsp.codelens.refresh()<CR>")
@@ -115,11 +143,39 @@ lspconfig.gopls.setup{{ on_attach=on_attach,
     },
 }}
 
-lspconfig.jsonls.setup{}
-lspconfig.terraformls.setup{}
-lspconfig.html.setup{}
-lspconfig.clangd.setup{}
+-- lspconfig.jsonls.setup{}
+-- lspconfig.terraformls.setup{}
+-- lspconfig.html.setup{}
+-- lspconfig.clangd.setup{}
+-- need to install taplo-cli: cargo install taplo-cli --features lsp
+lspconfig.taplo.setup{}
+lspconfig.pyright.setup{}
 
+-- local runtime_path = vim.split(package.path, ';')
+-- table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.lua")
+lspconfig.sumneko_lua.setup{
+    settings = {
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+                pathStrict = false,
+                -- path = runtime_path,
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+                enable = false,
+            }
+        }
+    }
+}
 
 local extension_path = '/Users/dialtone/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/'
 local codelldb_path = extension_path .. 'adapter/codelldb'
@@ -182,6 +238,7 @@ local opts = {
   -- these override the defaults set by rust-tools.nvim
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
+    on_attach=on_attach,
     settings = {
       ["rust-analyzer"] = {
           assist = {
@@ -267,7 +324,6 @@ vim.g.root_pattern = {'.git/'}
 -- autopairs
 -- If you want insert `(` after select function or method item
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
 cmp.event:on(
   'confirm_done',
   cmp_autopairs.on_confirm_done()

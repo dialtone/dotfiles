@@ -79,8 +79,14 @@ return require('packer').startup(function()
     use 'godlygeek/tabular'
     use 'preservim/vim-markdown'
 
-    use 'tpope/vim-commentary'
+    -- use 'tpope/vim-commentary'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 
-    use 'cespare/vim-toml'
+    -- use 'cespare/vim-toml'
     -- Initialize plugin system
 end)
