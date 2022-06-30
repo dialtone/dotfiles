@@ -21,9 +21,11 @@ return require('packer').startup(function()
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }  -- We recommend updating the parsers on update
     use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use 'nvim-treesitter/playground'
 
     -- Debugger DAP protocol integration
     use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
     use 'lifepillar/vim-gruvbox8'
 
@@ -46,10 +48,7 @@ return require('packer').startup(function()
     -- use 'junegunn/fzf'
     -- use 'junegunn/fzf.vim'
 
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
+    use "windwp/nvim-autopairs"
 
     -- Populate scroll bar with dots where diagnostics is
     -- use {

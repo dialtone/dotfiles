@@ -179,7 +179,7 @@ lspconfig.sumneko_lua.setup{
 
 local extension_path = '/Users/dialtone/.vscode/extensions/vadimcn.vscode-lldb-1.7.0/'
 local codelldb_path = extension_path .. 'adapter/codelldb'
-local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
 
 local opts = {
     tools = { -- rust-tools options
@@ -305,10 +305,10 @@ cmp.setup({
 
   -- Installed sources
   sources = {
-    { name = 'luasnip' },
     { name = 'nvim_lsp' },
-    { name = 'path' },
     { name = 'buffer' },
+    { name = 'luasnip' },
+    { name = 'path' },
   },
 })
 
