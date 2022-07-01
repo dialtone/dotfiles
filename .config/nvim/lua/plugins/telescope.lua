@@ -1,5 +1,5 @@
 local m = require("utils")
-
+local actions = require("telescope.actions")
 
 require('telescope').setup{
   defaults = {
@@ -10,18 +10,19 @@ require('telescope').setup{
         -- map actions.which_key to <C-h> (default: <C-/>)
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["<C-h>"] = "which_key"
+        ["<C-h>"] = "which_key",
+        -- close
+        ["<esc>"] = actions.close,
+        -- clear prompt
+        ["<C-u>"] = false
+
       }
     }
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
+    find_files = {
+      find_command = {"fd", "--type", "f", "--hidden", "--follow", "--exclude", ".git" }
+    },
   },
   extensions = {
     fzf = {
@@ -42,3 +43,4 @@ m.nmap("<leader>p", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 m.nmap("<leader>g", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 m.nmap("<leader>;", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 m.nmap("<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+m.nmap("<Leader>fb", "<cmd>lua require('telescope.builtin').builtin()<cr>")
