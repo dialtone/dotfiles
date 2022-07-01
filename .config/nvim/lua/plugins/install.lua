@@ -41,10 +41,15 @@ return require('packer').startup(function(use)
     use 'junegunn/vim-easy-align'
     use 'airblade/vim-rooter'
 
-    use { 'ibhagwan/fzf-lua',
-      -- optional for icon support
-      requires = { 'kyazdani42/nvim-web-devicons' }
+    -- use { 'ibhagwan/fzf-lua',
+    --   -- optional for icon support
+    --   requires = { 'kyazdani42/nvim-web-devicons' }
+    -- }
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- use 'junegunn/fzf'
     -- use 'junegunn/fzf.vim'
