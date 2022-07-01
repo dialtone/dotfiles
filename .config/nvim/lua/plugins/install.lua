@@ -1,4 +1,4 @@
-return require('packer').startup(function() 
+return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use 'neovim/nvim-lspconfig'
@@ -26,6 +26,7 @@ return require('packer').startup(function()
     -- Debugger DAP protocol integration
     use 'mfussenegger/nvim-dap'
     use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use 'theHamsta/nvim-dap-virtual-text'
 
     use 'lifepillar/vim-gruvbox8'
 
