@@ -1,7 +1,7 @@
 -- Configure LSP
 -- https://github.com/neovim/nvim-lspconfig#rust_analyzer
 
-local m = require('utils')
+local m = require('dialtone.utils')
 
 vim.opt.completeopt = { 'menuone', 'noinsert', 'noselect' }
 vim.opt.shortmess:append("c")
@@ -108,7 +108,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 vim.api.nvim_set_option('updatetime', 1000)
-vim.api.nvim_create_autocmd("CursorHold", {pattern="*", callback=function()
+local aug = vim.api.nvim_create_augroup('plug_setup', { clear = true })
+vim.api.nvim_create_autocmd("CursorHold", {pattern="*", group=aug, callback=function()
     vim.diagnostic.open_float()
 end})
 

@@ -1,4 +1,4 @@
-local m = require('utils')
+local m = require('dialtone.utils')
 
 vim.opt.rtp:append("/opt/homebrew/bin/fzf")
 

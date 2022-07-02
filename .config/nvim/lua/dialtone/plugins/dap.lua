@@ -1,4 +1,4 @@
-local m = require("utils")
+local m = require("dialtone.utils")
 local dap = require("dap")
 local dapui = require("dapui")
 
@@ -11,8 +11,10 @@ m.nmap("<F12>", "<Cmd>lua require'dap'.step_out()<CR>")
 m.nmap("<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
 m.nmap("<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
 m.nmap("<Leader>lp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
-m.nmap("<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>")
+m.nmap("<Leader>do", "<Cmd>lua require'dap'.repl.open()<CR>")
 m.nmap("<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>")
+
+m.nmap("<Leader>dr", "<Cmd>RustDebuggables<CR>")
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()

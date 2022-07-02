@@ -1,6 +1,8 @@
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
 
+local gen = ag('general', { clear = true })
+
 local function setup_markdown()
     local set = vim.bo
 
@@ -13,12 +15,13 @@ end
 
 au({"BufRead", "BufNewFile"}, {
     pattern="*.{md,markdown,mdown,mkd,mkdn}",
-    callback=setup_markdown
+    callback=setup_markdown,
+    group=gen,
 })
 
 -- Highlight yanked area for 500ms
 -- au TextYankPost * silent! lua vim.highlight.on_yank()
-au("TextYankPost", {pattern="*", callback=function()
+au("TextYankPost", {pattern="*", group=gen, callback=function()
     vim.highlight.on_yank({timeout=500})
 end
 })
@@ -27,12 +30,16 @@ end
 -- Remember last location in file, but not for commit messages.
 -- see :help last-position-jump
 vim.cmd([[
-au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup reloader
+    au!
+    au BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
 ]])
 
 -- set of files for which we'll spell check
 vim.cmd([[
 augroup spellcheck_documentation
+  au!
   autocmd BufNewFile,BufRead *.md setlocal spell
   autocmd BufNewFile,BufRead *.rdoc setlocal spell
 augroup END
@@ -45,10 +52,10 @@ local function format_rust()
     vim.lsp.buf.formatting_sync(nil, 1000)
     vim.api.nvim_win_set_cursor(0, lineno)
 end
-au("BufWritePre", {pattern="*.rs", callback=format_rust})
+au("BufWritePre", {pattern="*.rs", group=gen, callback=format_rust})
 
 
-au("FileType", {pattern="make", callback=function ()
+au("FileType", {pattern="make", group=gen, callback=function ()
     vim.bo.expandtab=true
 end
 })
@@ -57,13 +64,23 @@ end
 -- autoformat go with organization of imports
 au("BufWritePre", {
   pattern = { "*.go" },
+  group = gen,
   callback = function()
     vim.lsp.buf.formatting_sync(nil, 3000)
   end,
 })
 
+-- use q to leave buffer
+au('FileType', {
+  group = gen,
+  pattern = {'qf', 'help', 'man', 'lspinfo', 'harpoon', 'null-ls-info'},
+  command = 'nnoremap <buffer> q <cmd>quit<cr>'
+})
+
+-- organize imports
 au("BufWritePre", {
     pattern = { "*.go" },
+    group = gen,
     callback = function()
         local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
         params.context = {only = {"source.organizeImports"}}

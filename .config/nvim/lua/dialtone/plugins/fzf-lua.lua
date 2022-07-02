@@ -1,4 +1,4 @@
-local m = require("utils")
+local m = require("dialtone.utils")
 -- all setup data is available here: https://github.com/ibhagwan/fzf-lua
 
 m.nmap(';', "<cmd>lua require('fzf-lua').buffers()<cr>")

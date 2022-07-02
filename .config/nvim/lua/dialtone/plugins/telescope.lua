@@ -1,4 +1,4 @@
-local m = require("utils")
+local m = require("dialtone.utils")
 local actions = require("telescope.actions")
 
 require('telescope').setup{

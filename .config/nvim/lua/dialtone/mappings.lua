@@ -1,4 +1,4 @@
-local m = require('utils')
+local m = require('dialtone.utils')
 
 -- vim.g.mapleader = ','
 
@@ -88,6 +88,19 @@ m.map("!", "<Leader>a", "<esc>a")
 -- new line and insert shortcuts
 m.map("!", "<Leader>O", "<esc>O")
 m.map("!", "<Leader>o", "<esc>o")
+
+-- reload config
+function _G.reload_nvim_conf()
+  for name,_ in pairs(package.loaded) do
+    if name:match('^dialtone') then -- or name:match('^lsp') or name:match('^plugins') then
+      package.loaded[name] = nil
+    end
+  end
+
+  dofile(vim.env.MYVIMRC)
+  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+end
+m.nmap("<Leader>%%", "<cmd>lua reload_nvim_conf()<CR>")
 
 
 m.nmap("<leader>o", ":PyrightOrganizeImports<cr>")
