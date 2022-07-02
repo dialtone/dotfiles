@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
     use 'theHamsta/nvim-dap-virtual-text'
 
     use 'lifepillar/vim-gruvbox8'
+    use "EdenEast/nightfox.nvim" -- Packer
 
     use 'nvim-lua/plenary.nvim'
     use 'simrat39/rust-tools.nvim'

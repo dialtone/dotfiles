@@ -10,6 +10,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
 end
 
+require("dialtone.settings")
 require("dialtone.plugins.install")
 require("dialtone.plugins.setup")
 require("dialtone.plugins.lualine")
@@ -22,7 +23,6 @@ require("dialtone.plugins.autopairs")
 -- require("plugins.fzf")
 -- require("plugins.fzf-lua")
 
-require("dialtone.settings")
 require("dialtone.mappings")
 require("dialtone.auto")
 

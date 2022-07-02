@@ -5,7 +5,8 @@ if vim.fn.has('termguicolors') == 1 then
     set.termguicolors = true
     vim.g.gruvbox_plugin_hi_groups = true
     vim.g.gruvbox_filetype_hi_groups = true
-    vim.cmd('colorscheme gruvbox8_hard')
+    -- vim.cmd('colorscheme gruvbox8_hard')
+    vim.cmd('colorscheme terafox')
 end
 
 vim.cmd[[
@@ -86,7 +87,7 @@ set.swapfile = false
 set.startofline = false
 
 -- wrapping options http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
-set.formatoptions=tcroqnb
+set.formatoptions="tcroqnb"
 
 set.directory = "/Users/dialtone/.vim/_temp"
 set.wildignore:append("*.pyc")
