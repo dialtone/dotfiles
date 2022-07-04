@@ -12,8 +12,6 @@ return require('packer').startup(function(use)
     -- Snippet completion source for nvim-cmp
     use { 'L3MON4D3/LuaSnip' }
     use { 'saadparwaiz1/cmp_luasnip' }
-    -- use 'hrsh7th/cmp-vsnip'
-    -- use 'hrsh7th/vim-vsnip'
 
     -- Other useful completion sources
     use 'hrsh7th/cmp-path'
@@ -34,26 +32,15 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'simrat39/rust-tools.nvim'
 
-    -- Optional dependencies
-    -- use 'nvim-lua/popup.nvim'
-    -- use 'nvim-telescope/telescope.nvim'
-
     -- nvim 0.4+
     use 'junegunn/vim-easy-align'
     use 'airblade/vim-rooter'
 
-    -- use { 'ibhagwan/fzf-lua',
-    --   -- optional for icon support
-    --   requires = { 'kyazdani42/nvim-web-devicons' }
-    -- }
     use {
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
-    -- use 'junegunn/fzf'
-    -- use 'junegunn/fzf.vim'
 
     use "windwp/nvim-autopairs"
 
@@ -65,9 +52,6 @@ return require('packer').startup(function(use)
     --   end
     -- }
 
-    -- use 'scrooloose/nerdtree'
-    -- use 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-    -- use 'vim-airline/vim-airline'
     use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -85,7 +69,6 @@ return require('packer').startup(function(use)
     use 'godlygeek/tabular'
     use 'preservim/vim-markdown'
 
-    -- use 'tpope/vim-commentary'
     use {
         'numToStr/Comment.nvim',
         config = function()
@@ -93,6 +76,10 @@ return require('packer').startup(function(use)
         end
     }
 
-    -- use 'cespare/vim-toml'
+    use {
+      'lewis6991/gitsigns.nvim',
+      -- tag = 'release' -- To use the latest release
+    }
+
     -- Initialize plugin system
 end)

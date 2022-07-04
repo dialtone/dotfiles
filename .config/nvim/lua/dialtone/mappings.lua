@@ -9,8 +9,6 @@ m.cmap("%%", "<C-R>=expand('%:h').'/'<cr>")
 -- back to previous buffer
 m.nmap("<leader><leader>", "<C-^>")
 
-m.map("", "<space>", ":")
-
 -- vim.cmd[[
 --     map <m-d-left> :bp<cr>
 --     map <m-d-right> :bn<cr>
@@ -24,6 +22,28 @@ m.map("", "<space>", ":")
 m.nmap("<Left>", ":bp<CR>", {noremap=false})
 m.nmap("<Right>", ":bn<CR>", {noremap=false})
 
+-- stay in indent mode
+m.vmap("<", "<gv")
+m.vmap(">", ">gv")
+
+-- Move text up and down
+m.vmap("<C-j>", ":m .+1<CR>==")
+m.vmap("<C-k>", ":m .-2<CR>==")
+-- keep the yank register when highlight/paste to replace
+m.vmap("p", '"_dP')
+
+-- Allow clipboard copy paste in neovim
+m.map("", "<D-v>", '"+p')
+m.map("!", "<D-v>", "<C-R>+")
+m.tmap("<D-v>", "<C-R>+")
+m.vmap("<D-c>", '"+y')
+
+-- Visual Block --
+-- Move text up and down
+m.vmap("J", ":move '>+1<CR>gv-gv")
+m.vmap("K", ":move '<-2<CR>gv-gv")
+m.vmap("<C-j>", ":move '>+1<CR>gv-gv")
+m.vmap("<C-k>", ":move '<-2<CR>gv-gv")
 
 -- Map Escape
 m.imap("<c-L>", "<Esc>")
