@@ -14,8 +14,6 @@ m.nmap("<Leader>lp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.inpu
 m.nmap("<Leader>do", "<Cmd>lua require'dap'.repl.open()<CR>")
 m.nmap("<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>")
 
-m.nmap("<Leader>dr", "<Cmd>RustDebuggables<CR>")
-
 dap.listeners.after.event_initialized["dapui_config"] = function()
   dapui.open()
 end

@@ -75,10 +75,6 @@ m.nmap("<c-l>", "<c-w>l")
 -- force close the quickfix window
 m.nmap("cq", ":cclose<cr>")
 
--- build cargo
-m.nmap("<leader>c", ":Cbuild<cr>")
--- run cargo
-m.nmap("<leader>e", ":Crun<cr>")
 
 -- when in terminal mode, leave terminal mode with simple ESC key
 m.tmap("<Esc>", "<C-\\><C-n>")
@@ -112,7 +108,7 @@ m.map("!", "<Leader>o", "<esc>o")
 -- reload config
 function _G.reload_nvim_conf()
   for name,_ in pairs(package.loaded) do
-    if name:match('^dialtone') then -- or name:match('^lsp') or name:match('^plugins') then
+    if name:match('^dialtone') then -- or name:match('^lsp') or name:match('^plugins') thenreload
       package.loaded[name] = nil
     end
   end

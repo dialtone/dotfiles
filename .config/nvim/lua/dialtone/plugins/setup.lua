@@ -272,11 +272,8 @@ local opts = {
 }
 
 require('rust-tools').setup(opts)
---require('telescope').setup{
---  defaults = {
---    file_ignore_patterns = {"%.gz"},
---  }
---}
+m.nmap("<Leader>rr", "<Cmd>RustRunnables<CR>")
+m.nmap("<Leader>rd", "<Cmd>RustDebuggables<CR>")
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
