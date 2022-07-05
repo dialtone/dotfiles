@@ -43,6 +43,9 @@ set.textwidth = 9999
 set.mouse = 'a'
 set.ruler = true
 
+-- when pasting from clipboard, don't apply formatting
+set.paste = true
+
 set.cursorline=true
 set.number=true
 set.relativenumber=true
@@ -56,7 +59,7 @@ set.sidescrolloff=10
 set.visualbell=true
 vim.cmd("set t_vb=")
 
-set.clipboard="unnamed"
+set.clipboard="unnamedplus"
 set.laststatus=2
 set.autoread=true
 set.hidden=true
@@ -65,7 +68,7 @@ set.hlsearch=true    -- highlight matches
 set.incsearch=true   -- incremental searching
 set.ignorecase=true  -- searches are case insensitive...
 set.smartcase=true   -- ... unless they contain at least one capital letter
-
+set.iskeyword:append("-")
 
 set.wildmenu=true
 set.wildmode= {"longest", "full"}
