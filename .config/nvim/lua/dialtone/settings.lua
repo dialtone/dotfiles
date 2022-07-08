@@ -44,7 +44,7 @@ set.mouse = 'a'
 set.ruler = true
 
 -- when pasting from clipboard, don't apply formatting
-set.paste = true
+-- set.paste = true
 
 set.cursorline=true
 set.number=true
