@@ -32,6 +32,12 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'simrat39/rust-tools.nvim'
 
+    -- spinner for lsp in bottom right
+    use 'j-hui/fidget.nvim'
+
+    -- wrap insert parenthesis or other wrapping characters
+    use 'tpope/vim-surround'
+
     -- nvim 0.4+
     use 'junegunn/vim-easy-align'
     use 'airblade/vim-rooter'

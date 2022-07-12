@@ -38,6 +38,13 @@ m.map("!", "<D-v>", "<C-R>+")
 m.tmap("<D-v>", "<C-R>+")
 m.vmap("<D-c>", '"+y')
 
+
+-- Quickly insert semicolon at end of line
+m.map("", "<leader><leader>;", "maA;<esc>`a");
+
+-- Quickly insert comma at end of line
+m.map("", "<leader><leader>", "maA,<esc>`a");
+
 -- Visual Block --
 -- Move text up and down
 m.vmap("J", ":move '>+1<CR>gv-gv")

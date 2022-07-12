@@ -216,6 +216,10 @@ local opts = {
             -- prefix for all the other hints (type, chaining)
             -- default: "=>"
             other_hints_prefix  = "=>",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
         },
 
         hover_actions = {
@@ -240,6 +244,10 @@ local opts = {
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
   server = {
     on_attach=on_attach,
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     settings = {
       ["rust-analyzer"] = {
           assist = {
@@ -260,9 +268,12 @@ local opts = {
               debug = {
                   enable = true,
               }
-          }
-      }
-    }
+          },
+          updates = {
+              channel = "nightly",
+          },
+      },
+    },
   }, -- rust-analyer options
 
   dap = {
@@ -274,6 +285,9 @@ local opts = {
 require('rust-tools').setup(opts)
 m.nmap("<Leader>rr", "<Cmd>RustRunnables<CR>")
 m.nmap("<Leader>rd", "<Cmd>RustDebuggables<CR>")
+
+
+require('fidget').setup({})
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
