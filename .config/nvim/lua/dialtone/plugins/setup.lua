@@ -12,10 +12,10 @@ local lspconfig = require'lspconfig'
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-m.nmap('<space>e', vim.diagnostic.open_float)
+m.nmap('<leader>e', vim.diagnostic.open_float)
 m.nmap('[d', vim.diagnostic.goto_prev)
 m.nmap(']d', vim.diagnostic.goto_next)
-m.nmap('<space>q', vim.diagnostic.setloclist)
+m.nmap('<leader>q', vim.diagnostic.setloclist)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -32,16 +32,16 @@ local on_attach = function(client, bufnr)
   m.nmap('K', vim.lsp.buf.hover, bufopts)
   m.nmap('gi', vim.lsp.buf.implementation, bufopts)
   m.nmap('<C-k>', vim.lsp.buf.signature_help, bufopts)
-  m.nmap('<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  m.nmap('<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  m.nmap('<space>wl', function()
+  m.nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  m.nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  m.nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  m.nmap('<space>D', vim.lsp.buf.type_definition, bufopts)
-  m.nmap('<space>rn', vim.lsp.buf.rename, bufopts)
-  m.nmap('<space>ca', vim.lsp.buf.code_action, bufopts)
+  m.nmap('<leader>D', vim.lsp.buf.type_definition, bufopts)
+  m.nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
+  m.nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
   m.nmap('gr', vim.lsp.buf.references, bufopts)
-  m.nmap('<space>f', vim.lsp.buf.formatting, bufopts)
+  m.nmap('<leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
 local util = require 'lspconfig/util'

@@ -5,8 +5,8 @@ if vim.fn.has('termguicolors') == 1 then
     set.termguicolors = true
     vim.g.gruvbox_plugin_hi_groups = true
     vim.g.gruvbox_filetype_hi_groups = true
-    -- vim.cmd('colorscheme gruvbox8_hard')
-    vim.cmd('colorscheme terafox')
+    vim.cmd('colorscheme gruvbox8_hard')
+    -- vim.cmd('colorscheme terafox')
 end
 
 vim.cmd[[
