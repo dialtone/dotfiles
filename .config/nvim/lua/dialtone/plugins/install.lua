@@ -36,7 +36,7 @@ return require('packer').startup(function(use)
     use 'j-hui/fidget.nvim'
 
     -- wrap insert parenthesis or other wrapping characters
-    use 'tpope/vim-surround'
+    use "kylechui/nvim-surround"
 
     -- nvim 0.4+
     use 'junegunn/vim-easy-align'

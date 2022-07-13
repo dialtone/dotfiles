@@ -288,6 +288,7 @@ m.nmap("<Leader>rd", "<Cmd>RustDebuggables<CR>")
 
 
 require('fidget').setup({})
+require("nvim-surround").setup({})
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
