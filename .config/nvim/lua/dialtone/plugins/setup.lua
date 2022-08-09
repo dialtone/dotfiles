@@ -17,6 +17,8 @@ m.nmap('[d', vim.diagnostic.goto_prev)
 m.nmap(']d', vim.diagnostic.goto_next)
 m.nmap('<leader>q', vim.diagnostic.setloclist)
 
+local rt = require("rust-tools")
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -39,9 +41,13 @@ local on_attach = function(client, bufnr)
   end, bufopts)
   m.nmap('<leader>D', vim.lsp.buf.type_definition, bufopts)
   m.nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
-  m.nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
+  -- m.nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
   m.nmap('gr', vim.lsp.buf.references, bufopts)
   m.nmap('<leader>f', vim.lsp.buf.formatting, bufopts)
+  -- Hover actions
+  m.nmap("<leader>ha", rt.hover_actions.hover_actions, { buffer = bufnr })
+  -- Code action groups
+  m.nmap("<Leader>ca", rt.code_action_group.code_action_group, { buffer = bufnr })
 end
 
 local util = require 'lspconfig/util'
@@ -184,42 +190,49 @@ local liblldb_path = extension_path .. 'lldb/lib/liblldb.dylib'
 
 local opts = {
     tools = { -- rust-tools options
-        -- automatically set inlay hints (type hints)
-        -- There is an issue due to which the hints are not applied on the first
-        -- opened file. For now, write to the file to trigger a reapplication of
-        -- the hints or just run :RustSetInlayHints.
-        -- default: true
-        autoSetHints = true,
+        -- how to execute terminal commands
+        -- options right now: termopen / quickfix
+        executor = require("rust-tools/executors").termopen,
 
-        -- whether to show hover actions inside the hover window
-        -- this overrides the default hover handler
-        -- default: true
-        hover_with_actions = true,
+        -- callback to execute once rust-analyzer is done initializing the workspace
+        -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
+        on_initialized = nil,
 
-        runnables = {
-            -- whether to use telescope for selection menu or not
-            -- default: true
-            -- use_telescope = true
-
-            -- rest of the opts are forwarded to telescope
-        },
-
+        -- These apply to the default RustSetInlayHints command
         inlay_hints = {
-            -- wheter to show parameter hints with the inlay hints or not
-            -- default: true
-            show_parameter_hints = true,
+          -- automatically set inlay hints (type hints)
+          -- default: true
+          auto = true,
 
-            -- prefix for parameter hints
-            -- default: "<-"
-            parameter_hints_prefix = "<-",
+          -- Only show inlay hints for the current line
+          only_current_line = false,
 
-            -- prefix for all the other hints (type, chaining)
-            -- default: "=>"
-            other_hints_prefix  = "=>",
-            max_len_align = false,
-            max_len_align_padding = 1,
-            right_align = false,
-            right_align_padding = 7,
+          -- whether to show parameter hints with the inlay hints or not
+          -- default: true
+          show_parameter_hints = true,
+
+          -- prefix for parameter hints
+          -- default: "<-"
+          parameter_hints_prefix = "<- ",
+
+          -- prefix for all the other hints (type, chaining)
+          -- default: "=>"
+          other_hints_prefix = "=> ",
+
+          -- whether to align to the lenght of the longest line in the file
+          max_len_align = false,
+
+          -- padding from the left if max_len_align is true
+          max_len_align_padding = 1,
+
+          -- whether to align to the extreme right or not
+          right_align = false,
+
+          -- padding from the right if right_align is true
+          right_align_padding = 7,
+
+          -- The color of the hints
+          highlight = "Comment",
         },
 
         hover_actions = {
@@ -282,7 +295,9 @@ local opts = {
   },
 }
 
-require('rust-tools').setup(opts)
+
+-- local rt = require("rust-tools")
+rt.setup(opts)
 m.nmap("<Leader>rr", "<Cmd>RustRunnables<CR>")
 m.nmap("<Leader>rd", "<Cmd>RustDebuggables<CR>")
 m.nmap("<Leader>h", "<Cmd>RustOpenExternalDocs<CR>")
