@@ -2,6 +2,7 @@
 # basically in each subshell
 # seup cargo/rust and erlang and home bin
 set -g fish_user_paths $HOME/.pyenv/versions/2.7.18/bin /opt/homebrew/bin /usr/local/opt/llvm/bin $HOME/.cargo/bin $HOME/bin /usr/local/opt/erlang@21/bin $fish_user_paths
+fish_add_path /opt/homebrew/opt/arm-gcc-bin@8/bin/
 
 # support virtualenv
 eval (python -m virtualfish)
