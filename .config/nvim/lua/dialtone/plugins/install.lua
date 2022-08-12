@@ -52,6 +52,14 @@ return require('packer').startup(function(use)
 
     use "windwp/nvim-autopairs"
 
+    use {
+        'saecki/crates.nvim',
+        tag = 'v0.2.1',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('crates').setup()
+        end,
+    }
     -- Populate scroll bar with dots where diagnostics is
     -- use {
     --   'lewis6991/satellite.nvim',
