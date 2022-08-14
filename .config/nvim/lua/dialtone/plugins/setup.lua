@@ -314,6 +314,13 @@ local has_words_before = function()
 end
 local cmp = require'cmp'
 local luasnip = require("luasnip")
+-- this setup call fixes https://github.com/L3MON4D3/LuaSnip/issues/525
+-- which allows the engine to remove untouched autocomplete markers when
+-- the sequence of events happens
+luasnip.config.setup({
+    region_check_events = "CursorHold,InsertLeave,InsertEnter",
+    delete_check_events = "TextChanged,InsertLeave",
+})
 cmp.setup({
   enabled = function()
     -- disable completion in comments
