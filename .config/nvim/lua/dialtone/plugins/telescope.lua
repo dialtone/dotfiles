@@ -57,3 +57,6 @@ m.nmap("<leader>g", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
 m.nmap("<leader>;", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 m.nmap("<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 m.nmap("<Leader>fb", "<cmd>lua require('telescope.builtin').builtin()<cr>")
+m.nmap("<Leader>f", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>")
+
+

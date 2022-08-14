@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
     -- Other useful completion sources
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-cmdline'
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }  -- We recommend updating the parsers on update
     use 'nvim-treesitter/nvim-treesitter-textobjects'
