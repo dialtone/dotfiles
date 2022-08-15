@@ -401,4 +401,6 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
-require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").load()
+require("luasnip.loaders.from_vscode").load({ paths = {'~/.config/nvim/my-snippets'} })
+

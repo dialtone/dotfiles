@@ -1,0 +1,12 @@
+{
+  "testmod": {
+    "prefix": "testmod",
+    "body": [
+      "#[cfg(test)]",
+      "mod tests {",
+      "    ${1:Tests},",
+      "}"
+    ],
+    "description": "mod tests"
+  }
+}
