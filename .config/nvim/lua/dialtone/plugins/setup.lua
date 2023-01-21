@@ -43,7 +43,7 @@ local on_attach = function(client, bufnr)
   m.nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
   -- m.nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
   m.nmap('gr', vim.lsp.buf.references, bufopts)
-  m.nmap('<leader>f', vim.lsp.buf.formatting, bufopts)
+  m.nmap('<leader>f', vim.lsp.buf.format, bufopts)
   -- Hover actions
   m.nmap("<leader>ha", rt.hover_actions.hover_actions, { buffer = bufnr })
   -- Code action groups
@@ -260,7 +260,7 @@ local opts = {
     flags = {
         debounce_text_changes = 150,
     },
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(), --update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     settings = {
       ["rust-analyzer"] = {
           assist = {

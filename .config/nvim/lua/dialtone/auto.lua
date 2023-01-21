@@ -49,7 +49,7 @@ augroup END
 -- function keeps the cursor where it should be even if somehow this formatting calls moves it
 local function format_rust()
     local lineno = vim.api.nvim_win_get_cursor(0)
-    vim.lsp.buf.formatting_sync(nil, 1000)
+    vim.lsp.buf.format()
     vim.api.nvim_win_set_cursor(0, lineno)
 end
 au("BufWritePre", {pattern="*.rs", group=gen, callback=format_rust})
@@ -66,7 +66,7 @@ au("BufWritePre", {
   pattern = { "*.go" },
   group = gen,
   callback = function()
-    vim.lsp.buf.formatting_sync(nil, 3000)
+    vim.lsp.buf.format({timeout_ms=3000})
   end,
 })
 
