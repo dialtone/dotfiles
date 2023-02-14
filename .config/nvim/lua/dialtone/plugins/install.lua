@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
 
     use 'lifepillar/vim-gruvbox8'
     use "EdenEast/nightfox.nvim" -- Packer
+    use "rebelot/kanagawa.nvim"
 
     use 'nvim-lua/plenary.nvim'
     use 'simrat39/rust-tools.nvim'
@@ -97,6 +98,8 @@ return require('packer').startup(function(use)
       'lewis6991/gitsigns.nvim',
       -- tag = 'release' -- To use the latest release
     }
+
+    use "mbbill/undotree"
 
     -- Initialize plugin system
 end)

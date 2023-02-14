@@ -5,7 +5,7 @@ set -g fish_user_paths $HOME/.pyenv/versions/2.7.18/bin /opt/homebrew/bin /usr/l
 fish_add_path /opt/homebrew/opt/arm-gcc-bin@8/bin/
 
 # support virtualenv
-eval (python -m virtualfish)
+# eval (python -m virtualfish)
 
 
 # setup go

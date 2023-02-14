@@ -125,6 +125,8 @@ function _G.reload_nvim_conf()
 end
 m.nmap("<Leader>%%", "<cmd>lua reload_nvim_conf()<CR>")
 
+-- undotree
+m.nmap("<leader>t", vim.cmd.UndotreeToggle)
 
 m.nmap("<leader>o", ":PyrightOrganizeImports<cr>")
 
